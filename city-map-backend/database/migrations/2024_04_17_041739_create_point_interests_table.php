@@ -197,7 +197,76 @@ return new class extends Migration
                 'longitude' => '-35.1815',
                 'categoria' => '1',
             ],
-            
+            [
+                'nome' => 'Torre Eiffel',
+                'endereco' => 'Champ de Mars, Paris, França',
+                'latitude' => '48.8584',
+                'longitude' => '2.2945',
+                'categoria' => '2',
+            ],
+            [
+                'nome' => 'Coliseu de Roma',
+                'endereco' => 'Piazza del Colosseo, Roma, Itália',
+                'latitude' => '41.8902',
+                'longitude' => '12.4922',
+                'categoria' => '3',
+            ],
+            [
+                'nome' => 'Museu do Louvre',
+                'endereco' => 'Rue de Rivoli, Paris, França',
+                'latitude' => '48.8606',
+                'longitude' => '2.3376',
+                'categoria' => '6',
+            ],
+            [
+                'nome' => 'Praça de São Pedro',
+                'endereco' => 'Cidade do Vaticano',
+                'latitude' => '41.9022',
+                'longitude' => '12.4536',
+                'categoria' => '5',
+            ],
+            [
+                'nome' => 'Acrópole de Atenas',
+                'endereco' => 'Atenas, Grécia',
+                'latitude' => '37.9715',
+                'longitude' => '23.7261',
+                'categoria' => '1',
+            ],
+            [
+                'nome' => 'Palácio de Buckingham',
+                'endereco' => 'Londres, Reino Unido',
+                'latitude' => '51.5014',
+                'longitude' => '-0.1419',
+                'categoria' => '4',
+            ],
+            [
+                'nome' => 'Catedral de Notre-Dame de Paris',
+                'endereco' => 'Parvis Notre-Dame - Pl. Jean-Paul II, Paris, França',
+                'latitude' => '48.8530',
+                'longitude' => '2.3499',
+                'categoria' => '4',
+            ],
+            [
+                'nome' => 'Basílica de São Marcos',
+                'endereco' => 'Piazza San Marco, Veneza, Itália',
+                'latitude' => '45.4345',
+                'longitude' => '12.3397',
+                'categoria' => '6',
+            ],
+            [
+                'nome' => 'Castelo de Neuschwanstein',
+                'endereco' => 'Schwangau, Alemanha',
+                'latitude' => '47.5576',
+                'longitude' => '10.7498',
+                'categoria' => '5',
+            ],
+            [
+                'nome' => 'Ponte Charles',
+                'endereco' => 'Praga, República Tcheca',
+                'latitude' => '50.0865',
+                'longitude' => '14.4119',
+                'categoria' => '4',
+            ],
         ]);
     }
 
