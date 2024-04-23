@@ -25,6 +25,7 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
       }}
     >
       <h2>Adicionar Local</h2>
+      <br/>
       <form onSubmit={onSubmit}>
         <label>
           Nome do Local:
@@ -35,6 +36,7 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
             onChange={onChange}
           />
         </label>
+        <br/>
         <label>
           Endereço:
           <input
@@ -44,6 +46,7 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
             onChange={onChange}
           />
         </label>
+        <br/>
         <label>
           Latitude:
           <input
@@ -54,6 +57,7 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
             disabled
           />
         </label>
+        <br/>
         <label>
           Longitude:
           <input
@@ -64,6 +68,7 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
             disabled
           />
         </label>
+        <br/>
         <label>
           Categoria:
           <select
@@ -80,6 +85,7 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
             <option value="6">Outros</option>
           </select>
         </label>
+        <br/><br/>
         <button type="submit">Salvar</button>
         <button onClick={onClose}>Fechar</button>
       </form>

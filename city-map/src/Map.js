@@ -20,7 +20,7 @@ function Map() {
   useEffect(() => {
     const fetchPoints = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/home');
+        const response = await axios.get('http://localhost:8000/api/home');
         setPoints(response.data);
       } catch (error) {
         console.error('Erro ao carregar pontos do JSON:', error);
@@ -44,6 +44,14 @@ function Map() {
     return null;
   }
 
+  const colorsByCategory = {
+    1: 'red',
+    2: 'blue',
+    3: 'green',
+    4: 'orange',
+    5: 'purple'
+  };
+  
   const mapCategoryToLabel = (categoryNumber) => {
     switch (categoryNumber) {
       case 1:
@@ -80,7 +88,7 @@ function Map() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/point-interest/', {
+      const response = await axios.post('http://localhost:8000/api/point-interest/', {
         nome: formData.nome,
         endereco: formData.endereco,
         latitude: formData.latitude,
@@ -108,7 +116,10 @@ function Map() {
       <MapContainer center={[0, 0]} zoom={2} style={{ height: '400px' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {points.map((point, index) => (
-        <Marker key={index} position={[point.latitude, point.longitude]} icon={L.icon({ iconUrl: markerIcon })}>
+        <Marker 
+          key={index} 
+          position={[point.latitude, point.longitude]} 
+          icon={L.divIcon({className: 'custom-marker', html: `<div style="width: 15px; height: 15px; border-radius: 50%; background-color: ${colorsByCategory[point.categoria]};"></div>`})}>
           <Popup>
             <div>
               <p>Nome: {point.nome}</p>
@@ -122,16 +133,33 @@ function Map() {
       ))}
         <AddMarkerToClick />
             {position && <Marker position={position} icon={L.icon({ iconUrl: markerIcon })}>
-            <Popup>
-                Latitude: {position.lat}<br/>
-                Longitude: {position.lng}<br/>
-                {position && (
-                    <button onClick={handleModalOpen}>Adicionar Local</button>
-                )}
-            </Popup>
-        </Marker>}
+              <Popup>
+                  Latitude: {position.lat}<br/>
+                  Longitude: {position.lng}<br/>
+                  {position && (
+                      <button onClick={handleModalOpen}>Adicionar Local</button>
+                  )}
+              </Popup>
+          </Marker>}
+          <div className="legend" style={{ position: 'absolute', zIndex: '1000', left: '10px', top: 'auto', bottom: '10px', backgroundColor: 'white', padding: '10px', borderRadius: '5px' }}>
+            <h4>Legenda</h4>
+            <div>
+              <span style={{ display: 'inline-block', width: '15px', height: '15px', backgroundColor: 'red', marginRight: '5px', borderRadius: '50%' }}></span> Alimentação
+            </div>
+            <div>
+              <span style={{ display: 'inline-block', width: '15px', height: '15px', backgroundColor: 'blue', marginRight: '5px', borderRadius: '50%' }}></span> Tecnologia
+            </div>
+            <div>
+              <span style={{ display: 'inline-block', width: '15px', height: '15px', backgroundColor: 'green', marginRight: '5px', borderRadius: '50%' }}></span> Saúde
+            </div>
+            <div>
+              <span style={{ display: 'inline-block', width: '15px', height: '15px', backgroundColor: 'orange', marginRight: '5px', borderRadius: '50%' }}></span> Serviços
+            </div>
+            <div>
+              <span style={{ display: 'inline-block', width: '15px', height: '15px', backgroundColor: 'purple', marginRight: '5px', borderRadius: '50%' }}></span> Distribuição
+            </div>
+          </div>
       </MapContainer>
-      
       <ModalCadastro
         isOpen={modalOpen}
         onClose={handleModalClose}
