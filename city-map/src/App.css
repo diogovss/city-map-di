@@ -8,3 +8,158 @@
   height: 300px;
   width: 700px;
 }
+
+.map {
+  background-color: #e9e9e9e3;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-container {
+  width: 100%;
+  height: 450px;
+  margin: 0 auto;
+  margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e9e9e9e3;
+}
+
+.map-heading {
+  font-size: 24px;
+  font-weight: bold;
+  color: #570404;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.map-paragraph {
+  font-size: 16px;
+  color: #570404;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* Estilo para o formulário */
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Estilo para os títulos do formulário */
+.form-title {
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #570404;
+}
+
+/* Estilo para os rótulos dos campos de entrada */
+.form-label {
+  display:flexbox;
+  font-size: 13px;
+  color: #570404;
+}
+
+/* Estilo para os campos de entrada */
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.form-select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 3px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 10px;
+  background-color: #fff; /* Cor de fundo */
+  color: #333; /* Cor do texto */
+}
+
+/* Estilo para os botões */
+.form-button-add {
+  padding: 7px 15px;
+  background-color: #189f06;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 10px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+.form-button-save {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 10px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.form-button-cancel {
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 10px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.form-button-add:hover {
+  background-color: #05770e;
+}
+
+.form-button-save:hover {
+  background-color: #0056b3;
+}
+
+.form-button-cancel:hover {
+  background-color: #7b0404;
+}
+
+/* Estilo para mensagens de erro */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.success-message {
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  background-color: #dff0d8;
+  border: 1px solid #d0e9c6;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 2000;
+}
+
+.message-box {
+  display: flex;
+  align-items: center;
+}
+
+.message-box p {
+  margin: 0;
+}
+

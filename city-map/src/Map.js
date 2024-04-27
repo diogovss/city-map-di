@@ -9,6 +9,7 @@ function Map() {
   const [points, setPoints] = useState([]);
   const [position, setPosition] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
   const [formData, setFormData] = useState({
     nome: '',
     endereco: '',
@@ -30,6 +31,10 @@ function Map() {
     fetchPoints();
   }, []);
 
+  const handleClick = (event) => {
+    setPosition(event.latlng);
+  };
+  
   function AddMarkerToClick() {
     const map = useMapEvents({
       click(e) {
@@ -83,20 +88,26 @@ function Map() {
 
   const handleModalClose = () => {
     setModalOpen(false);
+    setPosition(null);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/point-interest/', {
+      await axios.post('http://localhost:8000/api/point-interest/', {
         nome: formData.nome,
         endereco: formData.endereco,
         latitude: formData.latitude,
         longitude: formData.longitude,
         categoria: formData.categoria
       });
+
+      // Re-carrega todos os pontos após adicionar um novo ponto
+      const response = await axios.get('http://localhost:8000/api/home');
+      setPoints(response.data);
+
       console.log('Dados enviados com sucesso:', response.data);
-      // Limpar o formulário após o envio bem-sucedido
+      setSuccessMessage('Cadastro realizado com sucesso!');
       setFormData({
         nome: '',
         endereco: '',
@@ -104,58 +115,66 @@ function Map() {
         longitude: '',
         categoria: ''
       });
-      // Fechar o modal após o envio bem-sucedido
       handleModalClose();
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 3000);
     } catch (error) {
       console.error('Erro ao enviar os dados:', error);
     }
   };
 
   return (
-    <div>
-      <MapContainer center={[0, 0]} zoom={2} style={{ height: '400px' }}>
+    <div className='map-container'>
+      <MapContainer center={[0, 0]} zoom={2} onClick={handleClick} style={{ height: '400px' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {points.map((point, index) => (
         <Marker 
           key={index} 
           position={[point.latitude, point.longitude]} 
-          icon={L.divIcon({className: 'custom-marker', html: `<div style="width: 15px; height: 15px; border-radius: 50%; background-color: ${colorsByCategory[point.categoria]};"></div>`})}>
+          icon={L.divIcon({className: 'custom-marker', html: `<div style="width: 15px; height: 15px; border-radius: 50%; background-color: ${colorsByCategory[point.categoria]};"></div>`})}
+          eventHandlers={{mouseover: (event) => event.target.openPopup()}}
+        >
           <Popup>
             <div>
-              <p>Nome: {point.nome}</p>
-              <p>Endereço: {point.endereco}</p>
-              <p>Categoria: {mapCategoryToLabel(point.categoria)}</p>
-              <p>Latitude: {point.latitude}</p>
-              <p>Longitude: {point.longitude}</p>
+              <p className='form-label'><b>Nome:</b> {point.nome}</p>
+              <p className='form-label'><b>Endereço:</b> {point.endereco}</p>
+              <p className='form-label'><b>Categoria:</b> {mapCategoryToLabel(point.categoria)}</p>
+              <p className='form-label'><b>Latitude:</b> {point.latitude}</p>
+              <p className='form-label'><b>Longitude:</b> {point.longitude}</p>
             </div>
           </Popup>
         </Marker>
       ))}
         <AddMarkerToClick />
             {position && <Marker position={position} icon={L.icon({ iconUrl: markerIcon })}>
-              <Popup>
-                  Latitude: {position.lat}<br/>
-                  Longitude: {position.lng}<br/>
-                  {position && (
-                      <button onClick={handleModalOpen}>Adicionar Local</button>
-                  )}
-              </Popup>
-          </Marker>}
+          </Marker> && (
+        <Popup position={position}>
+          <p className="form-label">
+            <b>Latitude:</b> <br /> {position.lat}
+          </p>
+          <p className="form-label">
+            <b>Longitude:</b> <br /> {position.lng}
+          </p>
+          <button className="form-button-add" onClick={handleModalOpen}>Adicionar Local</button>
+        </Popup>
+      )}
+
           <div className="legend" style={{ position: 'absolute', zIndex: '1000', left: '10px', top: 'auto', bottom: '10px', backgroundColor: 'white', padding: '10px', borderRadius: '5px' }}>
-            <h4>Legenda</h4>
-            <div>
+            <h4 className='form-label'>Legenda</h4>
+            <div className='form-label'>
               <span style={{ display: 'inline-block', width: '15px', height: '15px', backgroundColor: 'red', marginRight: '5px', borderRadius: '50%' }}></span> Alimentação
             </div>
-            <div>
+            <div className='form-label'>
               <span style={{ display: 'inline-block', width: '15px', height: '15px', backgroundColor: 'blue', marginRight: '5px', borderRadius: '50%' }}></span> Tecnologia
             </div>
-            <div>
+            <div className='form-label'>
               <span style={{ display: 'inline-block', width: '15px', height: '15px', backgroundColor: 'green', marginRight: '5px', borderRadius: '50%' }}></span> Saúde
             </div>
-            <div>
+            <div className='form-label'>
               <span style={{ display: 'inline-block', width: '15px', height: '15px', backgroundColor: 'orange', marginRight: '5px', borderRadius: '50%' }}></span> Serviços
             </div>
-            <div>
+            <div className='form-label'>
               <span style={{ display: 'inline-block', width: '15px', height: '15px', backgroundColor: 'purple', marginRight: '5px', borderRadius: '50%' }}></span> Distribuição
             </div>
           </div>
@@ -167,6 +186,13 @@ function Map() {
         onChange={handleFormChange}
         onSubmit={handleSubmit}
       />
+      {successMessage && (
+        <div className="success-message">
+          <div className="message-box">
+            <p>{successMessage}</p>
+          </div>
+        </div> 
+      )}
     </div>
   );
 }

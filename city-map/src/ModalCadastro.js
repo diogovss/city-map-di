@@ -1,9 +1,56 @@
 import React from 'react';
 import Modal from 'react-modal';
+import './App.css';
+import { useState } from 'react';
 
 Modal.setAppElement('#root'); // Define o elemento raiz da aplicação para acessibilidade
 
 function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
+  const [errors, setErrors] = useState({
+    nome: '',
+    endereco: '',
+    categoria: ''
+  });
+
+  const handleValidation = () => {
+    const newErrors = {};
+    let isValid = true;
+
+    if (!formData.nome) {
+      newErrors.nome = 'Preencha o campo \"Nome do Local\"';
+      isValid = false;
+    }
+
+    if (!formData.endereco) {
+      newErrors.endereco = 'Preencha o campo \"Endereço\"';
+      isValid = false;
+    }
+
+    if (!formData.categoria) {
+      newErrors.categoria = 'Selecione uma categoria';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (handleValidation()) {
+      onSubmit(e);
+    }
+  };
+  
+  const handleModalClose = () => {
+    onClose();
+    setErrors({
+      nome: '',
+      endereco: '',
+      categoria: ''
+    });
+  };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -23,33 +70,38 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
           zIndex: 1001 // Defina um valor ainda maior para garantir que o conteúdo do modal seja renderizado acima do overlay
         }
       }}
-    >
-      <h2>Adicionar Local</h2>
+    ><div className="form-container">
+      <h2 className="form-title">Adicionar Local</h2>
       <br/>
-      <form onSubmit={onSubmit}>
-        <label>
+      <form onSubmit={handleSubmit}>
+        <label className="form-label">
           Nome do Local:
           <input
+            className="form-input"
             type="text"
             name="nome"
             value={formData.nome}
             onChange={onChange}
           />
+          {errors.nome && <span className="error-message">{errors.nome}</span>}
         </label>
         <br/>
-        <label>
+        <label className="form-label">
           Endereço:
           <input
+            className="form-input"
             type="text"
             name="endereco"
             value={formData.endereco}
             onChange={onChange}
           />
+          {errors.endereco && <span className="error-message">{errors.endereco}</span>}
         </label>
         <br/>
-        <label>
+        <label className="form-label">
           Latitude:
           <input
+            className="form-input"
             type="text"
             name="latitude"
             value={formData.latitude}
@@ -58,9 +110,10 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
           />
         </label>
         <br/>
-        <label>
+        <label className="form-label">
           Longitude:
           <input
+            className="form-input"
             type="text"
             name="longitude"
             value={formData.longitude}
@@ -69,9 +122,10 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
           />
         </label>
         <br/>
-        <label>
+        <label className="form-label">
           Categoria:
           <select
+            className="form-select"
             name="categoria"
             value={formData.categoria}
             onChange={onChange}
@@ -84,11 +138,13 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
             <option value="5">Distribuição</option>
             <option value="6">Outros</option>
           </select>
+          {errors.categoria && <span className="error-message">{errors.categoria}</span>}
         </label>
         <br/><br/>
-        <button type="submit">Salvar</button>
-        <button onClick={onClose}>Fechar</button>
+        <button className="form-button-save" type="submit">Salvar</button>
+        <button className="form-button-cancel" onClick={handleModalClose}>Cancelar</button>
       </form>
+      </div>
     </Modal>
   );
 }
