@@ -49,6 +49,10 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
       endereco: '',
       categoria: ''
     });
+    formData.nome = '';
+    formData.endereco = '';
+    formData.categoria = '';
+    console.log('asdssss');
   };
 
   return (
