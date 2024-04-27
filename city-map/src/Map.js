@@ -125,7 +125,14 @@ function Map() {
   };
 
   return (
-    <div className='map-container'>
+    <div className='map'>
+      <div>
+        <p className='map-paragraph'>
+          Voce tem <b>{points.length}</b> lugares marcados no mapa.<br/>
+          Clique em cada um para ver os detalhes ou clique em outro lugar do mapa para cadastrar um novo local.
+        </p>
+      </div>
+    <br/><br/><br/>
       <MapContainer center={[0, 0]} zoom={2} onClick={handleClick} style={{ height: '400px' }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {points.map((point, index) => (

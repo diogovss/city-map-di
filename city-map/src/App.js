@@ -19,11 +19,7 @@ function App() {
 
   return (
     <div className='map'>
-      <h1 className='map-heading'>City Map</h1>
-      <p className='map-paragraph'>
-        Voce tem <b>{points.length}</b> lugares marcados no mapa.<br/>
-        Clique em cada um para ver os detalhes ou clique em outro lugar do mapa para cadastrar um novo local.
-      </p>
+      <h1 className='map-heading'>City Map - Pontos de Interesse Geográficos</h1>
     </div>
   );
 
