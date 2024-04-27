@@ -144,6 +144,7 @@ function Map() {
         >
           <Popup>
             <div>
+              <h2 className='form-title'>Dados do Local</h2>
               <p className='form-label'><b>Nome:</b> {point.nome}</p>
               <p className='form-label'><b>Endereço:</b> {point.endereco}</p>
               <p className='form-label'><b>Categoria:</b> {mapCategoryToLabel(point.categoria)}</p>
