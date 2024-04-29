@@ -10,8 +10,7 @@ class PointInterestController extends Controller
     
     public function listAll() {
         $pointInterests = PointInterest::all();
-
-        return view('home', ['pointInterests' => $pointInterests]);
+        return json_encode($pointInterests);
     }
 
     public function create(Request $request) {
@@ -25,7 +24,7 @@ class PointInterestController extends Controller
 
         $point->save();
 
-        return redirect('home');
+        return json_encode($point);
     }
     
 }

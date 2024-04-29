@@ -35,7 +35,7 @@ function Map() {
   const handleClick = (event) => {
     setPosition(event.latlng);
   };
-  
+
   function AddMarkerToClick() {
     const map = useMapEvents({
       click(e) {
@@ -103,7 +103,7 @@ function Map() {
         categoria: formData.categoria
       });
 
-      setPoints(response.data);
+      setPoints([...points, response.data]);
       console.log('Dados enviados com sucesso:', response.data);
       setSuccessMessage('Cadastro realizado com sucesso!');
       setFormData({
