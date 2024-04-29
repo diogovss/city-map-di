@@ -55,7 +55,8 @@ function Map() {
     2: 'blue',
     3: 'green',
     4: 'orange',
-    5: 'purple'
+    5: 'purple',
+    6: 'brown',
   };
   
   const mapCategoryToLabel = (categoryNumber) => {
@@ -70,6 +71,8 @@ function Map() {
         return 'Serviços';
       case 5:
         return 'Distribuição';
+      case 6:
+        return 'Outros';
       default:
         return 'Outro';
     }
@@ -182,6 +185,9 @@ function Map() {
             </div>
             <div className='form-label'>
               <span style={{ display: 'inline-block', width: '15px', height: '15px', backgroundColor: 'purple', marginRight: '5px', borderRadius: '50%' }}></span> Distribuição
+            </div>
+            <div className='form-label'>
+              <span style={{ display: 'inline-block', width: '15px', height: '15px', backgroundColor: 'brown', marginRight: '5px', borderRadius: '50%' }}></span> Outros
             </div>
           </div>
       </MapContainer>
