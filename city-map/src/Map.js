@@ -4,6 +4,7 @@ import ModalCadastro from './ModalCadastro';
 import axios from 'axios';
 import L from 'leaflet';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import API_URL from './api';
 
 function Map() {
   const [points, setPoints] = useState([]);
@@ -21,7 +22,7 @@ function Map() {
   useEffect(() => {
     const fetchPoints = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/home');
+        const response = await axios.get(API_URL);
         setPoints(response.data);
       } catch (error) {
         console.error('Erro ao carregar pontos do JSON:', error);
@@ -94,7 +95,7 @@ function Map() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/point-interest/', {
+      const response = await axios.post(API_URL, {
         nome: formData.nome,
         endereco: formData.endereco,
         latitude: formData.latitude,
@@ -102,10 +103,7 @@ function Map() {
         categoria: formData.categoria
       });
 
-      // Re-carrega todos os pontos após adicionar um novo ponto
-      const response = await axios.get('http://localhost:8000/api/home');
       setPoints(response.data);
-
       console.log('Dados enviados com sucesso:', response.data);
       setSuccessMessage('Cadastro realizado com sucesso!');
       setFormData({

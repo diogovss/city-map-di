@@ -62,7 +62,7 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
       style={{
         overlay: {
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          zIndex: 1000 // Defina um valor alto para garantir que o modal seja renderizado acima do mapa
+          zIndex: 1000
         },
         content: {
           top: '50%',
@@ -71,7 +71,7 @@ function ModalCadastro({ isOpen, onClose, formData, onChange, onSubmit }) {
           bottom: 'auto',
           marginRight: '-50%',
           transform: 'translate(-50%, -50%)',
-          zIndex: 1001 // Defina um valor ainda maior para garantir que o conteúdo do modal seja renderizado acima do overlay
+          zIndex: 1001
         }
       }}
     ><div className="form-container">

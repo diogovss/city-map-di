@@ -8,5 +8,5 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/home',[PointInterestController::class, 'index']);
-Route::post('/point-interest', [PointInterestController::class, 'store']);
+Route::get('/points-interest',[PointInterestController::class, 'listAll']);
+Route::post('/points-interest', [PointInterestController::class, 'create']);

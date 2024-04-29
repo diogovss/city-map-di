@@ -24,6 +24,5 @@ Route::get('/points/{latitude}/{longitude}', function ($latitude, $longitude) {
     ]);
 });
 
-Route::get('/home',[PointInterestController::class, 'index']);
-Route::get('/point-interest/create',[PointInterestController::class, 'create']);
-Route::post('/point-interest', [PointInterestController::class, 'store']);
+Route::get('/home',[PointInterestController::class, 'listAll']);
+Route::post('/points-interest', [PointInterestController::class, 'create']);

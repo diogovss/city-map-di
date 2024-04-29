@@ -8,17 +8,13 @@ use App\Models\PointInterest;
 class PointInterestController extends Controller
 {
     
-    public function index() {
+    public function listAll() {
         $pointInterests = PointInterest::all();
 
         return view('home', ['pointInterests' => $pointInterests]);
     }
 
-    public function create() {
-        return view('point-interest.create');
-    }
-
-    public function store(Request $request) {
+    public function create(Request $request) {
         $point = new PointInterest;
 
         $point->nome = $request->nome;
